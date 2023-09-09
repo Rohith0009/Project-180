@@ -31,7 +31,24 @@ TextAreaOUT = Text(
 )
 TextAreaOUT.place(anchor=CENTER, relx=0.5, rely=0.8)
 
-btn = Button(root, font=("Arial", 25), text="Translate", bg="pale turquoise")
+
+def TranslateF():
+    src = "english"
+    dest = LangOut.get()
+    text = TextAreaIN.get(1.0, END)
+    translator = Translator()
+
+    try:
+        translated = translator.translate(text=text, src=src, dest=dest)
+        TextAreaOUT.delete(1.0, END)
+        TextAreaOUT.insert(END, translated.text)
+    except:
+        print("Try Again.")
+
+
+btn = Button(
+    root, font=("Arial", 25), text="Translate", bg="pale turquoise", command=TranslateF
+)
 btn.place(anchor=CENTER, relx=0.5, rely=0.53)
 
 root.mainloop()
